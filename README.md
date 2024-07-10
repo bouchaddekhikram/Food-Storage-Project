@@ -10,6 +10,8 @@ The Food Storage Project is a web application designed to manage food items in s
 - **Swagger Documentation**: API documentation is generated using Swagger, providing detailed information about each endpoint and its usage.
 - **Postman Testing**: Testing of CRUD operations can be done using Postman, ensuring the reliability and functionality of the API endpoints.
 - **Data Persistence**: Food item data is stored in a MongoDB database, ensuring data persistence and reliability.
+- **Authentication**: Implements authentication using JWT (JSON Web Tokens) for secure access to the application.
+- **AuthGuard**: Uses an AuthGuard to protect routes that require authentication, ensuring only authenticated users can access protected parts of the application.
 
 ## Endpoints
 
