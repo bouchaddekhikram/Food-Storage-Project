@@ -18,22 +18,23 @@ export class FoodItemListComponent implements OnInit {
 
   loadFoodItems(): void {
     this.foodItemService.getFoodItems().subscribe(items => {
-      console.log('Loaded food items:', items); // Debugging log
+      console.log('Loaded food items:', items); // Debugging 
       this.foodItems = items;
     });
   }
 
-  deleteFoodItem(id: string): void {  // Change the type to string
-    console.log('Deleting food item with id:', id); // Debugging log
+  deleteFoodItem(id: string): void { 
+    console.log('Deleting food item with id:', id); 
     this.foodItemService.deleteFoodItem(id).subscribe({
       next: () => {
-        console.log('Food item deleted successfully'); // Debugging log
+        console.log('Food item deleted successfully'); // Debugging 
         this.loadFoodItems();
       },
       error: (err) => console.error('Failed to delete food item', err)
     });
   }
 
+  // func for the expirationDate : Wajdi
   getDaysUntilExpiration(expirationDate: Date): number {
     const now = new Date();
     const exp = new Date(expirationDate);
@@ -42,6 +43,8 @@ export class FoodItemListComponent implements OnInit {
     return diffDays;
   }
 
+
+  // func for the status : Ikram
   getStatus(expirationDate: Date): string {
     const days = this.getDaysUntilExpiration(expirationDate);
     if (days < 0) {

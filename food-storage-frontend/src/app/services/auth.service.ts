@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-import { AuthResponse } from './auth-response.interface'; // Import the AuthResponse interface
+import { AuthResponse } from './auth-response.interface'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/auth';  // Your NestJS backend URL
+  private apiUrl = 'http://localhost:3000/auth';  // NestJS backend URL
 
   constructor(private http: HttpClient) { }
 
@@ -31,7 +31,6 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('access_token');
-    // Optionally, clear other session data or perform additional cleanup
   }
 
   isLoggedIn(): boolean {
@@ -40,7 +39,6 @@ export class AuthService {
 
   private setSession(authResult: AuthResponse): void {
     localStorage.setItem('access_token', authResult.access_token);
-    // Store other relevant session data if needed
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

@@ -5,7 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { FoodItemListComponent } from './food-item-list/food-item-list.component';
 import { FoodItemDetailComponent } from './food-item-detail/food-item-detail.component';
 import { FoodItemFormComponent } from './food-item-form/food-item-form.component';
-import { AuthGuard } from './auth.guard'; // Import your AuthGuard
+import { AuthGuard } from './auth.guard'; 
 
 
 const routes: Routes = [

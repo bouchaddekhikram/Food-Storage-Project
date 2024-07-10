@@ -15,7 +15,7 @@ export class FoodItemService {
     return this.http.get<FoodItem[]>(this.apiUrl);
   }
 
-  getFoodItem(id: string): Observable<FoodItem> {  // Expecting string id
+  getFoodItem(id: string): Observable<FoodItem> {  
     return this.http.get<FoodItem>(`${this.apiUrl}/${id}`);
   }
 
@@ -23,11 +23,11 @@ export class FoodItemService {
     return this.http.post<FoodItem>(this.apiUrl, foodItem);
   }
 
-  updateFoodItem(id: string, foodItem: Omit<FoodItem, 'id'>): Observable<FoodItem> {  // Expecting string id
+  updateFoodItem(id: string, foodItem: Omit<FoodItem, 'id'>): Observable<FoodItem> {  
     return this.http.put<FoodItem>(`${this.apiUrl}/${id}`, foodItem);
   }
 
-  deleteFoodItem(id: string): Observable<void> {  // Expecting string id
+  deleteFoodItem(id: string): Observable<void> { 
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

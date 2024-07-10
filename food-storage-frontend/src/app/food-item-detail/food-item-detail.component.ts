@@ -21,7 +21,7 @@ export class FoodItemDetailComponent implements OnInit {
   }
 
   getFoodItem(): void {
-    const id = this.route.snapshot.paramMap.get('id'); // id will be a string
+    const id = this.route.snapshot.paramMap.get('id'); // id will be a string - checked with ikram
     if (id) {
       this.foodItemService.getFoodItem(id).subscribe(item => {
         this.foodItem = item;
@@ -37,7 +37,7 @@ export class FoodItemDetailComponent implements OnInit {
     return diffDays;
   }
 
-  getStatus(expirationDate: Date): string {
+  getStatus(expirationDate: Date): string { //checked by Wajdi, Success
     const days = this.getDaysUntilExpiration(expirationDate);
     if (days < 0) {
       return 'Expired';
@@ -50,7 +50,7 @@ export class FoodItemDetailComponent implements OnInit {
     }
   }
 
-  getStatusClass(expirationDate: Date): string {
+  getStatusClass(expirationDate: Date): string { //checked by Wajdi, Success
     const status = this.getStatus(expirationDate);
     if (status === 'Expired') {
       return 'text-danger';

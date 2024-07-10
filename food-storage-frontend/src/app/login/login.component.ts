@@ -17,7 +17,7 @@ export class LoginComponent {
     this.authService.login(this.username, this.password).subscribe(() => {
       this.router.navigate(['/']);
     }, error => {
-      console.error('Login failed', error);
+      console.error('Login failed', error); // catch error for the login component
     });
   }
 }

@@ -9,7 +9,7 @@
         <p><strong>Days Until Expiration : </strong> {{ getDaysUntilExpiration(foodItem.expirationDate) }}</p>
         <p><strong>Status:</strong> <span [ngClass]="getStatusClass(foodItem.expirationDate)" style="padding-left: 10px;">{{ getStatus(foodItem.expirationDate) }}</span></p>
         <a [routerLink]="['/edit-food-item', foodItem.id]" class="btn btn-warning">Edit</a>
-        <a routerLink="/" class="btn btn-secondary">Back</a>
+        <a routerLink="/" class="btn btn-secondary" style="border-left-style: solid;margin-left: 10px;">Back</a>
       </div>
     </div>
   </div>

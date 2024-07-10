@@ -16,7 +16,6 @@ export class RegisterComponent {
   onSubmit(): void {
     // Check if the form is valid
     if (!this.username || !this.password) {
-      // Optionally, you can handle validation errors or display messages here
       console.error('Username and password are required.');
       return;
     }
@@ -24,13 +23,11 @@ export class RegisterComponent {
     // Call AuthService to register the user
     this.authService.register(this.username, this.password).subscribe(
       () => {
-        // On successful registration, navigate to login page or home page
         this.router.navigate(['/login']);
       },
       error => {
-        // Handle registration failure (e.g., display error message to user)
+        // Handle registration failure 
         console.error('Registration failed', error);
-        // Optionally, you can reset the form fields here
         this.username = '';
         this.password = '';
       }
