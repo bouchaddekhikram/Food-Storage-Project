@@ -9,7 +9,9 @@ The Food Storage Project is a web application designed to manage food items in s
 - **RESTful API**: The backend, built with Nest.js, exposes a RESTful API that communicates with the frontend to perform data operations.
 - **Swagger Documentation**: API documentation is generated using Swagger, providing detailed information about each endpoint and its usage.
 - **Postman Testing**: Testing of CRUD operations can be done using Postman, ensuring the reliability and functionality of the API endpoints.
-- **Data Persistence**: Food item data is stored in a MySQL database, ensuring data persistence and reliability.
+- **Data Persistence**: Food item data is stored in a MongoDB database, ensuring data persistence and reliability.
+- **Authentication**: Implements authentication using JWT (JSON Web Tokens) for secure access to the application.
+- **AuthGuard**: Uses an AuthGuard to protect routes that require authentication, ensuring only authenticated users can access protected parts of the application.
 
 ## Endpoints
 
@@ -22,10 +24,10 @@ The Food Storage Project is a web application designed to manage food items in s
 ## Data Model
 
 - **FoodItem**:
-  - **id** (integer): Unique identifier for the food item.
+  - **id** (string): Unique identifier for the food item (MongoDB ObjectId).
   - **name** (string): Name of the food item.
-  - **quantity** (integer): Quantity of the food item available in storage.
-  - **expirationDate** (date): Expiration date of the food item.
+  - **quantity** (number): Quantity of the food item available in storage.
+  - **expirationDate** (Date): Expiration date of the food item.
 
 ## Technologies Used
 
@@ -39,7 +41,8 @@ The Food Storage Project is a web application designed to manage food items in s
 - **Backend**:
   - Nest.js
   - TypeScript
-  - MySQL
+  - MongoDB
+  - Mongoose
 
 ## Installation
 
@@ -48,7 +51,7 @@ To run the Food Storage Project locally, follow these steps:
 1. Clone this repository to your local machine.
 2. Navigate to the `food-storage-frontend` directory and run `npm install` to install frontend dependencies.
 3. Navigate to the `food-storage-backend` directory and run `npm install` to install backend dependencies.
-4. Set up your MySQL database and configure the connection details in the backend.
+4. Set up your MongoDB database and configure the connection details in the backend.
 5. Run `npm start` in both the frontend and backend directories to start the application.
 
 ## Usage
@@ -61,3 +64,34 @@ For API documentation, you can access the Swagger documentation by navigating to
 
 Contributions to the Food Storage Project are welcome! Feel free to fork this repository, make changes, and submit pull requests for review.
 
+## Angular Components and Services
+
+### Components
+
+* **Food Item List Component**
+  - Displays a list of food items with details.
+  - Allows deleting of food items.
+  - Provides a status indicator based on the expiration date.
+
+* **Food Item Detail Component**
+  - Displays detailed information about a specific food item.
+  - Allows navigation to the edit page for updating food item details.
+
+* **Food Item Form Component**
+  - Handles adding new food items.
+  - Handles updating existing food items.
+
+### Services
+
+* **Food Item Service**
+  - Manages API calls for CRUD operations.
+  - Provides methods for:
+    - `getFoodItems()`: Retrieves all food items.
+    - `getFoodItem(id: string)`: Retrieves a food item by ID.
+    - `addFoodItem(foodItem: FoodItem)`: Adds a new food item.
+    - `updateFoodItem(id: string, foodItem: FoodItem)`: Updates an existing food item.
+    - `deleteFoodItem(id: string)`: Deletes a food item by ID.
+
+## License
+
+© 2024 WAJDI RAOUAFI. All rights reserved.
