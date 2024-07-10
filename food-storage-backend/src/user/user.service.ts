@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User, UserSchema } from './user.schema'; // Import User and UserSchema
+import { User } from './user.interface';
+import UserSchema from './user.schema'; // Correct import
 
 @Injectable()
 export class UserService {
   constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
-
+  
   async validateUser(username: string, password: string): Promise<User | null> {
-    const user = await this.userModel.findOne({ username }).exec();
-    if (user && user.password === password) {
+    const user = await this.userModel.findOne({ username }).select('+password').exec(); // Include '+password' to override select: false
+    if (user && await user.comparePassword(password)) {
       return user;
     }
     return null;

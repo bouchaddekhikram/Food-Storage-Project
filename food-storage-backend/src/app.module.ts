@@ -7,7 +7,7 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://wajdiraouafi:WAJdi112233@cluster0.knp1peb.mongodb.net/Food-Storage'), // Replace with your MongoDB connection string
+    MongooseModule.forRoot('mongodb+srv://wajdiraouafi:WAJdi112233@cluster0.knp1peb.mongodb.net/Food-Storage'), 
     FoodItemModule, UserModule, AuthModule,
   ],
 })

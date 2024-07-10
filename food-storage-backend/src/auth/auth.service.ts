@@ -37,8 +37,7 @@ export class AuthService {
     // Create a new user
     const newUser = await this.userService.createUser(username, password);
 
-    // Optionally, perform additional tasks (e.g., send welcome email)
 
-    return newUser; // You can return whatever is appropriate for your use case
+    return newUser; 
   }
 }
