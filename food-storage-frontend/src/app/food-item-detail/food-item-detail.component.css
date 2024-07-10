@@ -1,0 +1,27 @@
+.container {
+  margin-top: 20px;
+}
+
+.card {
+  margin-top: 20px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+}
+
+.card-text {
+  margin-bottom: 10px;
+}
+
+.text-danger {
+  color: red;
+}
+
+.text-warning {
+  color: orange;
+}
+
+.text-success {
+  color: green;
+}
