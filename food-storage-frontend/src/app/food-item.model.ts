@@ -3,5 +3,6 @@ export interface FoodItem {
     name: string;
     quantity: number;
     expirationDate: Date;
+    description: string;
   }
   

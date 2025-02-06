@@ -1,33 +1,38 @@
 import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { FoodItemService } from './food-item.service';
-import { FoodItem } from '../food-item.interface'; // Assuming this is your interface for food items
+import { CreateFoodItemDto } from './dto/create-food-item.dto';
+import { UpdateFoodItemDto } from './dto/update-food-item.dto';
+import { FoodItem } from './entities/food-item.entity';
 
 @Controller('food-items')
 export class FoodItemController {
   constructor(private readonly foodItemService: FoodItemService) {}
 
+  @Post()
+  create(@Body() createFoodItemDto: CreateFoodItemDto): Promise<FoodItem> {
+    return this.foodItemService.create(createFoodItemDto);
+  }
+
   @Get()
-  async findAll(): Promise<FoodItem[]> {
+  findAll(): Promise<FoodItem[]> {
     return this.foodItemService.findAll();
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<FoodItem> {
-    return this.foodItemService.findOne(id);
-  }
-
-  @Post()
-  async create(@Body() createFoodItemDto: Omit<FoodItem, 'id'>): Promise<FoodItem> {
-    return this.foodItemService.create(createFoodItemDto);
+  findOne(@Param('id') id: number): Promise<FoodItem> {
+    return this.foodItemService.findOne(+id);
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() updateFoodItemDto: Omit<FoodItem, 'id'>): Promise<FoodItem> {
-    return this.foodItemService.update(id, updateFoodItemDto);
+  update(
+    @Param('id') id: number,
+    @Body() updateFoodItemDto: UpdateFoodItemDto,
+  ): Promise<FoodItem> {
+    return this.foodItemService.update(+id, updateFoodItemDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return this.foodItemService.remove(id);
+  remove(@Param('id') id: number): Promise<FoodItem> {
+    return this.foodItemService.remove(+id);
   }
 }

@@ -9,7 +9,13 @@ import { FoodItem } from '../food-item.model';
   styleUrls: ['./food-item-form.component.css']
 })
 export class FoodItemFormComponent implements OnInit {
-  foodItem: FoodItem = { id: 0, name: '', quantity: 0, expirationDate: new Date() };
+  foodItem: FoodItem = {
+    id: 0,
+    name: '',
+    quantity: 0,
+    expirationDate: new Date(),
+    description: ''
+  };
   isEditMode: boolean = false;
 
   constructor(

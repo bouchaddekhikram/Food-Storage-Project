@@ -1,78 +1,37 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { FoodItem } from 'src/food-item.interface';
-import { Model, Types } from 'mongoose';
-import { InjectModel } from '@nestjs/mongoose';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { FoodItem } from './entities/food-item.entity';
+import { CreateFoodItemDto } from './dto/create-food-item.dto';
+import { UpdateFoodItemDto } from './dto/update-food-item.dto';
 
 @Injectable()
 export class FoodItemService {
-  constructor(@InjectModel('FoodItem') private readonly foodItemModel: Model<FoodItem>) {}
+  constructor(
+    @InjectRepository(FoodItem)
+    private foodItemRepository: Repository<FoodItem>,
+  ) {}
 
-  async findAll(): Promise<FoodItem[]> {
-    const items = await this.foodItemModel.find().lean().exec();
-    return items.map(item => ({
-      id: item._id.toString(), // Convert ObjectId to string
-      name: item.name,
-      quantity: item.quantity,
-      expirationDate: item.expirationDate,
-    }));
+  create(createFoodItemDto: CreateFoodItemDto) {
+    const foodItem = this.foodItemRepository.create(createFoodItemDto);
+    return this.foodItemRepository.save(foodItem);
   }
 
-  async findOne(id: string): Promise<FoodItem> {
-    if (!Types.ObjectId.isValid(id)) {
-      throw new NotFoundException('Invalid ID');
-    }
-    const item = await this.foodItemModel.findById(id).lean().exec();
-    if (!item) {
-      throw new NotFoundException('Food item not found');
-    }
-    return {
-      id: item._id.toString(),
-      name: item.name,
-      quantity: item.quantity,
-      expirationDate: item.expirationDate,
-    };
+  findAll() {
+    return this.foodItemRepository.find();
   }
 
-  async create(foodItem: Omit<FoodItem, 'id'>): Promise<FoodItem> {
-    const newFoodItem = new this.foodItemModel(foodItem);
-    const savedItem = await newFoodItem.save();
-    return {
-      id: savedItem._id.toString(),
-      name: savedItem.name,
-      quantity: savedItem.quantity,
-      expirationDate: savedItem.expirationDate,
-    };
+  findOne(id: number) {
+    return this.foodItemRepository.findOne({ where: { id } });
   }
 
-  async update(id: string, updatedFoodItem: Omit<FoodItem, 'id'>): Promise<FoodItem> {
-    if (!Types.ObjectId.isValid(id)) {
-      throw new NotFoundException('Invalid ID');
-    }
-    const item = await this.foodItemModel.findByIdAndUpdate(id, updatedFoodItem, { new: true }).lean().exec();
-    if (!item) {
-      throw new NotFoundException('Food item not found');
-    }
-    return {
-      id: item._id.toString(),
-      name: item.name,
-      quantity: item.quantity,
-      expirationDate: item.expirationDate,
-    };
+  async update(id: number, updateFoodItemDto: UpdateFoodItemDto) {
+    await this.foodItemRepository.update(id, updateFoodItemDto);
+    return this.findOne(id);
   }
 
-  async remove(id: string): Promise<FoodItem> {
-    if (!Types.ObjectId.isValid(id)) {
-      throw new NotFoundException('Invalid ID');
-    }
-    const item = await this.foodItemModel.findByIdAndDelete(id).lean().exec();
-    if (!item) {
-      throw new NotFoundException('Food item not found');
-    }
-    return {
-      id: item._id.toString(),
-      name: item.name,
-      quantity: item.quantity,
-      expirationDate: item.expirationDate,
-    };
+  async remove(id: number) {
+    const foodItem = await this.findOne(id);
+    return this.foodItemRepository.remove(foodItem);
   }
 }

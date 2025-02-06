@@ -1,15 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { User } from './user.interface';
-import UserSchema from './user.schema'; // Correct import
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './entities/user.entity';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
-  
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+  ) {}
+
   async validateUser(username: string, password: string): Promise<User | null> {
-    const user = await this.userModel.findOne({ username }).select('+password').exec(); // Include '+password' to override select: false
+    const user = await this.userRepository.findOne({ where: { username } });
     if (user && await user.comparePassword(password)) {
       return user;
     }
@@ -17,11 +20,15 @@ export class UserService {
   }
 
   async findByUsername(username: string): Promise<User | null> {
-    return this.userModel.findOne({ username }).exec();
+    return this.userRepository.findOne({ where: { username } });
   }
 
-  async createUser(username: string, password: string): Promise<User> {
-    const newUser = new this.userModel({ username, password });
-    return newUser.save();
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
+    const newUser = this.userRepository.create(createUserDto);
+    return this.userRepository.save(newUser); // Password is already hashed in entity
+  }
+
+  async getAllUsers(): Promise<User[]> {
+    return this.userRepository.find();
   }
 }

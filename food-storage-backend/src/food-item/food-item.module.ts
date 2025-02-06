@@ -1,15 +1,12 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { FoodItemService } from './food-item.service';
 import { FoodItemController } from './food-item.controller';
-import { MongooseModule } from '@nestjs/mongoose';
-import { FoodItemSchema } from '../food-item/food.item.schema';
-
+import { FoodItem } from './entities/food-item.entity';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'FoodItem', schema: FoodItemSchema }]),
-  ],
-  providers: [FoodItemService],
+  imports: [TypeOrmModule.forFeature([FoodItem])],
   controllers: [FoodItemController],
+  providers: [FoodItemService],
 })
 export class FoodItemModule {}
