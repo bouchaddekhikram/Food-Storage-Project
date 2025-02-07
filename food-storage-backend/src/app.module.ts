@@ -10,10 +10,10 @@ import { User } from './user/entities/user.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: 'phoneshp-webapp-db.cdtnvtsufgb2.us-east-1.rds.amazonaws.com',
       port: 3306,
-      username: 'root', // XAMPP default
-      password: '', // Leave empty if no password is set
+      username: 'admin', // XAMPP default
+      password: 'Ikram112233', // Leave empty if no password is set
       database: 'food_storage',
       entities: [FoodItem, User],
       synchronize: true, // Enables automatic table creation
