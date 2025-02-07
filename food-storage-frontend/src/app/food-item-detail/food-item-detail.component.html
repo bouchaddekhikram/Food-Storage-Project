@@ -1,13 +1,13 @@
 <div class="container mt-4 d-flex justify-content-center">
   <div class="card w-50">
     <div class="card-body">
-      <h2 class="card-title text-center">Food Item Details</h2>
+      <h2 class="card-title text-center">Phone Details</h2>
       <div *ngIf="foodItem">
         <p><strong>Name:</strong> {{ foodItem.name }}</p>
-        <p><strong>Quantity:</strong> {{ foodItem.quantity }}</p>
-        <p><strong>Expiration Date:</strong> {{ foodItem.expirationDate | date }}</p>
-        <p><strong>Days Until Expiration:</strong> {{ getDaysUntilExpiration(foodItem.expirationDate) }}</p>
-        <p><strong>Status:</strong> <span [ngClass]="getStatusClass(foodItem.expirationDate)" style="padding-left: 10px;">{{ getStatus(foodItem.expirationDate) }}</span></p>
+        <p><strong>Price:</strong> {{ foodItem.quantity }}</p>
+        <!-- <p><strong>Expiration Date:</strong> {{ foodItem.expirationDate | date }}</p> -->
+        <!-- <p><strong>Days Until Expiration:</strong> {{ getDaysUntilExpiration(foodItem.expirationDate) }}</p>
+        <p><strong>Status:</strong> <span [ngClass]="getStatusClass(foodItem.expirationDate)" style="padding-left: 10px;">{{ getStatus(foodItem.expirationDate) }}</span></p> -->
         <p><strong>Description:</strong> {{ foodItem.description || 'No description available' }}</p>
         <div class="mt-3">
           <a [routerLink]="['/edit-food-item', foodItem.id]" class="btn btn-warning">Edit</a>
